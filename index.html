@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Image Comparison</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    .container {
+      text-align: center;
+      justify-content: center;
+      width: 90%
+    }
+    .image-container {
+      position: absolute;
+      left: 10%;
+      width: 750px;
+      margin: 10px auto;
+      border: 1px solid #ccc;
+    }
+    .base-image, .overlay-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: auto;
+      height: 600px;
+      display: block;
+    }
+    .overlay-image {
+      pointer-events: none;
+    }
+    .controls {
+      margin: 20px 0;
+    }
+    .controls label {
+      margin-right: 10px;
+      font-weight: bold;
+    }
+    .controls select, .controls input {
+      margin-right: 20px;
+    }
+    .slider-container {
+      margin: 20px 0;
+    }
+    .slider-labels {
+      display: flex;
+      justify-content: center;
+      gap: 90px; /* Adjust gap to position labels under slider ends */
+      margin-top: 5px;
+      margin-left:260px; /* Center the labels under the slider */
+      font-size: 14px;
+      color: #666;
+    }
+    .right-text-box {
+      position: absolute;
+      top: 40%;
+      right: 250px;
+      transform: translateY(-50%);
+      width: 12%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      background-color: cornsilk;
+      text-align: left;
+      font-size: 14px;
+    }
+    .footer {
+      position: fixed;
+      bottom: 0;
+      width: 90%; /* Match container width */
+      text-align: center;
+      padding: 10px 0; /* Add some padding for better readability */
+      background-color: cornsilk;
+      font-size: 12px;
+      color: #333;
+      border-top: 1px solid #ccc;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Integrated Landscape Management(ILM) Model Bioenergy Crop Comparison to Business as Usual(BAU) Model</h1>
+    <div class="controls">
+      <label for="metric">Select Marginality:</label>
+      <select id="metric">
+        <option value="nitrogen_loss">Nitrogen Loss</option>
+        <option value="sediment_yield">Sediment Yield</option>
+      </select>
+
+      <label for="plant">Select Bioenergy Crop:</label>
+      <select id="plant">
+        <option value="switchgrass">Switchgrass</option>
+        <option value="willow">Willow</option>
+        <option value="big_bluestem">Big Bluestem</option>
+      </select>
+    </div>
+
+    <div class="slider-container">
+      <label for="transparency">Drag the Slider to Choose An Image:</label>
+      <input type="range" id="transparency" min="0" max="100" value="10">
+    <div class="slider-labels">
+        <span>BAU</span>
+        <span>ILM</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="image-container">
+      <img id="baseImage" class="base-image" src="nitrogen_loss_business_as_usual.png" alt="Business as Usual">
+      <img id="overlayImage" class="overlay-image" src="" alt="Overlay Image" style="opacity: 0.1;">
+    </div>
+  </div>
+    <div class="right-text-box">
+        Each numbered section is an individual watershed.
+    </div>
+    <div class="logo">
+        <img src="ANL_Logo.png" style="position: absolute; top: 20px; right: 20px; width: 150px;">
+    </div>
+  <div class="footer">
+    Data Source: Herbert Ssegane and M. Cristina Negri. 2016. “An Integrated Landscape Designed for Commodity and Bioenergy Crops for a Tile-Drained Agricultural Watershed.” Journal of Environmental Quality 45 (5): 1588–1596.
+  </div>
+  
+  <script>
+    // Image mapping based on user selection
+    const imageMap = {
+      nitrogen_loss: {
+        businessAsUsual: "nitrate_bau.jpg",
+        switchgrass: "nitrate_switchgrass.jpg",
+        willow: "nitrate_willow.jpg",
+        big_bluestem: "nitrate_big_bluestem.jpg"
+      },
+      sediment_yield: {
+        businessAsUsual: "sediment_yield_bau.jpg",
+        switchgrass: "sediment_switchgrass.jpg",
+        willow: "sediment_willow.jpg",
+        big_bluestem: "sediment_big_bluestem.jpg"
+      }
+    };
+
+    // DOM elements
+    const metricSelect = document.getElementById("metric");
+    const plantSelect = document.getElementById("plant");
+    const transparencySlider = document.getElementById("transparency");
+    const baseImage = document.getElementById("baseImage");
+    const overlayImage = document.getElementById("overlayImage");
+
+    // Update base and overlay images based on user selection
+    function updateImages() {
+      const metric = metricSelect.value;
+      const plant = plantSelect.value;
+
+      // Update the base image (business as usual for selected metric)
+      baseImage.src = imageMap[metric].businessAsUsual;
+
+      // Update the overlay image (plant treatment for selected metric)
+      overlayImage.src = imageMap[metric][plant];
+
+      // Ensure the overlay image loads properly before applying transparency
+      overlayImage.onload = function() {
+        updateTransparency();
+      };
+    }
+
+    // Update transparency of overlay image
+    function updateTransparency() {
+      const transparency = transparencySlider.value;
+      
+      // Convert slider value (0-100) to opacity (0-1)
+      // 0 = show only base image (overlay fully transparent)
+      // 100 = show only overlay image (overlay fully opaque)
+      const opacity = transparency / 100;
+      
+      overlayImage.style.opacity = opacity;
+    }
+
+    // Event listeners
+    metricSelect.addEventListener("change", updateImages);
+    plantSelect.addEventListener("change", updateImages);
+    transparencySlider.addEventListener("input", updateTransparency);
+
+    // Initialize with default values
+    updateImages();
+  </script>
+</body>
+</html>
