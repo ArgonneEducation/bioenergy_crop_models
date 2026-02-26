@@ -22,11 +22,20 @@ This refers to a baseline model using current land use and management operations
 A native perennial prairie grass with potential for bioenergy production. 
 Andropogon gerardi 
 
-### Nitrate Leaching 
-Nitrates are prevalent in agricultural fertilizer used for traditional production and are also prevalent in runoff from agricultural lands.  Elevated nitrate levels in surface waters can lead to increased plant growth in these waters, which can have negative effects on other parts of the ecosystem.  In addition, increased nitrate concentrations in drinking water present hazards to human health.  The use of bioenergy crops in particular areas of an agricultural landscape can help to reduce the amount of nitrates that end up in surface waters.
+### Integrated Landscape Management (ILM)
+A form of landscape design where dedicated bioenergy crops are integrated among traditional row crops as a purposeful part of a land management strategy.
 
-### Sediment Loss 
-Sediment loss of agricultural land occurs due to soil erosion, which generally involves loss of fertile topsoil.  This results in cropland that is less productive.  Sediment runoff is also a leading cause of degraded water quality in rivers, streams, and other waterways.
+### Marginality
+A characteristic of agricultural land that identifies it as being subproductive for traditional row crops.
+
+### Nitrate Loss
+Nitrates applied to agricultural lands in fertilizer dissolve well in water and can therefore be prevalent in runoff from agricultural lands.  Elevated nitrate levels in surface waters due to this runoff have negative effects on other parts of the ecosystem.  In addition, increased nitrate concentrations in drinking water present hazards to human health.  The use of bioenergy crops in particular areas of an agricultural landscape can help to reduce the amount of nitrates that end up in surface waters.
+
+### Phytoremediation
+The use of plants to remove pollutants from soils and waters.
+
+### Sediment Yield 
+Sediment loss from agricultural land occurs due to soil erosion, which generally involves loss of fertile topsoil.  This results in cropland that is less productive.  Sediment runoff is also a leading cause of degraded water quality in rivers, streams, and other waterways.
 
 ### SWAT - Soil and Water Assessment Tool
 A small watershed to river basin-scale model used to simulate the quality and quantity of surface and ground water and predict the environmental impact of land use, and land management practices.  The version used in the study is QSWAT, an open-source version of SWAT.  More information about this tool can be found at https://swat.tamu.edu/software/qswat/
